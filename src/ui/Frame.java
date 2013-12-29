@@ -22,6 +22,7 @@ public class Frame extends JFrame{
         setSize(750,500);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         
         setFocusable(true);
         k = new Keyboard(defkeys);

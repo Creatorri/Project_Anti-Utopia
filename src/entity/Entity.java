@@ -72,14 +72,14 @@ public class Entity {
         }
     }
     public void move(int dx,int dy){
-        if(x+dx>=Level.SIZE || y+dy>=Level.SIZE || x+dx<=0 || y+dy<=0 || !(l.world[x+dx][y+dy] == TileType.AIR || l.world[x+dx][y+dy] == TileType.FIRE || l.world[x+dx][y+dy]==TileType.TORCH)){
+        if(x+dx>=Level.SIZE || y+dy>=Level.SIZE || x+dx<=0 || y+dy<=0 || (l.world[x+dx][y+dy] != TileType.AIR && l.world[x+dx][y+dy] != TileType.FIRE && l.world[x+dx][y+dy] != TileType.TORCH) || dx==0 || dy==0){
         }else{
-            System.out.println("Motion");
+            System.out.println("Motion @ ("+(x+dx)+","+(y+dy)+") on "+l.world[x+dx][y+dy]);
             x+=dx;
             y+=dy;
         }
     }
     public void update(){
-        move((rand.nextInt(2)-1),(rand.nextInt(2)-1));
+        move((1),(1));
     }
 }
