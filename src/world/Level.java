@@ -5,6 +5,7 @@ import entity.Entity;
 import entity.EntityType;
 import java.util.ArrayList;
 import java.util.Random;
+import render.Sprite;
 
 /**
  *
@@ -22,6 +23,7 @@ public class Level {
                 world[x][y] = TileType.STONE;
             }
         }
+        System.out.println("Generating World...");
         for(int i=0;i<rand.nextInt(SIZE/2);i++){
             generateMineshaft(rand.nextInt(SIZE),rand.nextInt(SIZE));
         }
@@ -32,7 +34,9 @@ public class Level {
             generateOres(rand.nextInt(SIZE),rand.nextInt(SIZE));
         }
         generateTemple(rand.nextInt(SIZE-25),rand.nextInt(SIZE-25));
+        System.out.println("World Generated. Populating the world...");
         populate();
+        System.out.println("Population Complete. Level Generated.");
     }
     public void generateMineshaft(int x,int y){
         int length = rand.nextInt(SIZE/2);

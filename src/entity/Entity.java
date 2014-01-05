@@ -3,6 +3,7 @@ package entity;
 
 import assets.LoadArt;
 import java.util.Random;
+import render.Sprite;
 import world.Level;
 import world.TileType;
 
@@ -15,12 +16,13 @@ public class Entity {
     LoadArt la = new LoadArt();
     Level l;
     int x,y;
-    public int size=64;
     public double health=20,maxhealth=20;
     public EntityType t;
+    public Sprite sp;
     public Entity(EntityType t1,Level l1){
         t=t1;
         l=l1;
+        sp = new Sprite(t1);
         switch(t){
             case BAT:
                 health=15;
@@ -48,7 +50,6 @@ public class Entity {
                 break;
             case DRAGON:
                 health=500;
-                size=128;
                 break;
             default:
                 health=20;
@@ -74,12 +75,10 @@ public class Entity {
     public void move(int dx,int dy){
         if(x+dx>=Level.SIZE || y+dy>=Level.SIZE || x+dx<=0 || y+dy<=0 || (l.world[x+dx][y+dy] != TileType.AIR && l.world[x+dx][y+dy] != TileType.FIRE && l.world[x+dx][y+dy] != TileType.TORCH) || dx==0 || dy==0){
         }else{
-            System.out.println("Motion @ ("+(x+dx)+","+(y+dy)+") on "+l.world[x+dx][y+dy]);
             x+=dx;
             y+=dy;
         }
     }
     public void update(){
-        move((1),(1));
     }
 }

@@ -13,10 +13,10 @@ import javax.swing.ImageIcon;
  * @author Torri
  */
 public class LoadArt {
-    public Image createImage(String path,String description, int sizeX, int sizeY) {
+    public Image createImage(String path, int sizeX, int sizeY) {
         URL imgURL = getClass().getResource(path);
         if (imgURL != null) {
-            ImageIcon ii = new ImageIcon(imgURL, description);
+            ImageIcon ii = new ImageIcon(imgURL, "Image");
             Image i = ii.getImage();
             i=i.getScaledInstance(sizeX, sizeY, Image.SCALE_SMOOTH);
             return i;
@@ -38,5 +38,19 @@ public class LoadArt {
             return null;
         }
         return null;
+    }
+    public boolean exists(String path){
+        URL imgurl = getClass().getResource(path);
+        if(imgurl!=null){
+            try {
+                ImageIO.read(imgurl);
+            } catch (IOException ex) {
+                return false;
+            }
+            return true;
+        }else{
+            System.err.println("Could not find file2: "+path);
+            return false;
+        }
     }
 }
