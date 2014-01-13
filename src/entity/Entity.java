@@ -58,6 +58,10 @@ public class Entity {
         maxhealth=health;
         spawn();
     }
+    public Entity(Level l1){
+        l=l1;
+        spawn();
+    }
     public int getX(){
         return x;
     }

@@ -5,7 +5,6 @@ import entity.Entity;
 import entity.EntityType;
 import java.util.ArrayList;
 import java.util.Random;
-import render.Sprite;
 
 /**
  *
@@ -104,4 +103,5 @@ public class Level {
             ents.add(new Entity(EntityType.values()[e],this));
         }
     }
+    
 }
