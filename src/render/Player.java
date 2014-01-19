@@ -5,6 +5,6 @@ package render;
  *
  * @author Torri
  */
-public enum AnimatedPlayer {
+public enum Player {
     DOWN,LEFT,UP,RIGHT
 }
