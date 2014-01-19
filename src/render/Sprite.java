@@ -82,8 +82,10 @@ public class Sprite {
                     i = spritesheet.getSubimage(0, 128, 64, 64);
                     break;
             }
-        }else if(e instanceof Player){
-            
+        }else if(e instanceof PlayerSheet){
+            if(!la.exists("player.png")){
+                
+            }
         }else{
             throw new Exception("Error: Wrong Enum Type!");
         }

@@ -5,6 +5,6 @@ package render;
  *
  * @author Torri
  */
-public enum Player {
+public enum PlayerSheet {
     DOWN,LEFT,UP,RIGHT
 }
