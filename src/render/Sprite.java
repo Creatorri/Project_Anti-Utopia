@@ -14,7 +14,7 @@ public class Sprite {
     private LoadArt la = new LoadArt();
     private BufferedImage spritesheet;
     public BufferedImage i = new BufferedImage(64,64,BufferedImage.TYPE_4BYTE_ABGR);
-    public Sprite(enum e){
+    public <E extends Enum<E>> Sprite(E e){
         if(e instanceof TileType){
             if(!la.exists("blocks.png")) return;
             spritesheet =  la.createBufferedImage("blocks.png");
@@ -81,13 +81,34 @@ public class Sprite {
                 case SPIDER:
                     i = spritesheet.getSubimage(0, 128, 64, 64);
                     break;
+                default:
+                    i = spritesheet;
+                    break;
             }
         }else if(e instanceof PlayerSheet){
-            if(!la.exists("player.png")){
-                
+            if(!la.exists("player.png")) return;
+            spritesheet = la.createBufferedImage("Player.png");
+            switch((PlayerSheet) e){
+                case DOWN:
+                    i = spritesheet.getSubimage(0, 0, 64, 64);
+                    break;
+                case LEFT:
+                    i = spritesheet.getSubimage(64, 0, 64, 64);
+                    break;
+                case UP:
+                    i = spritesheet.getSubimage(0, 64, 64, 64);
+                    break;
+                case RIGHT:
+                    i = spritesheet.getSubimage(64, 64, 64, 64);
+                    break;
+                default:
+                    i = spritesheet;
+                    break;
             }
         }else{
-            throw new Exception("Error: Wrong Enum Type!");
+            try {
+                throw new Exception("Error: Wrong Enum Type!");
+            } catch (Exception ex) {}
         }
     }
 }

@@ -17,7 +17,6 @@ import world.TileType;
 public class GamePlay extends JPanel{
     Level l;
     int offx=0,offy=0;
-    public static int x=50,y=50;
     public Sprite[] tiles = new Sprite[TileType.values().length];
     LoadArt la = new LoadArt();
     public GamePlay(){
@@ -29,15 +28,19 @@ public class GamePlay extends JPanel{
         offx=(getWidth()/2)-e.getX()*64;
         offy=(getHeight()/2)-e.getY()*64;
     }
-    public void setReletiveTo(int x, int y){
-        offx=(getWidth()/2)-x*64;
-        offy=(getHeight()/2)-y*64;
-    }
     public void update(){
         if(core.SubTerra.getLevel()==null) return;
         l = core.SubTerra.getLevel();
+        setReletiveTo(l.p);
         for(Entity e: l.ents){
             e.update();
+        }
+        for(int xx=0;xx<Level.SIZE;xx++){
+            for(int yy=0;yy<Level.SIZE;yy++){
+                if(l.worldDamage[xx][yy]<0){
+                    l.world[xx][yy]=TileType.AIR;
+                }
+            }
         }
         repaint();
     }
@@ -46,7 +49,6 @@ public class GamePlay extends JPanel{
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
         if(core.SubTerra.getLevel()==null || core.SubTerra.f==null) return;
-        setReletiveTo(x,y);
         setSize(core.SubTerra.f.getSize());
         for(int x1=0;x1<Level.SIZE;x1++){
             for(int y1=0;y1<Level.SIZE;y1++){
@@ -58,5 +60,6 @@ public class GamePlay extends JPanel{
             if(e.getX()*64+offx<=-64 || e.getX()*64+offx>=getWidth() || e.getY()*64+offy<=-64 || e.getY()>=getHeight()) continue;
             g2.drawImage(e.sp.i, e.getX()*64+offx, e.getY()*64+offy, this);
         }
+        g2.drawImage(l.p.sp.i, l.p.getX()*64+offx, l.p.getY()*64+offy, this);
     }
 }

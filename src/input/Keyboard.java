@@ -4,7 +4,6 @@ package input;
 import core.SubTerra;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import ui.GamePlay;
 
 /**
  *
@@ -40,16 +39,16 @@ public class Keyboard implements KeyListener{
     @Override
     public void keyTyped(KeyEvent e) {
         if(keyBind[0]){
-            GamePlay.y--;
+            SubTerra.getLevel().p.move(0, -1);
         }
         if(keyBind[1]){
-            GamePlay.y++;
+            SubTerra.getLevel().p.move(0, 1);
         }
         if(keyBind[2]){
-            GamePlay.x++;
+            SubTerra.getLevel().p.move(1, 0);
         }
         if(keyBind[3]){
-            GamePlay.x--;
+            SubTerra.getLevel().p.move(-1, 0);
         }
     }
     /**

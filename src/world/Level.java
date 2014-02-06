@@ -13,7 +13,9 @@ import java.util.Random;
 public class Level {
     public static final int SIZE = 100;
     public TileType[][] world = new TileType[SIZE][SIZE];
+    public int[][] worldDamage = new int[SIZE][SIZE];
     public ArrayList<Entity> ents = new ArrayList<>();
+    public entity.Player p;
     private final Random rand = new Random();
     private final TileType[] ores = {TileType.STONE,TileType.COAL,TileType.AIR,TileType.STEEL,TileType.URANIUM};
     public Level(){
@@ -35,6 +37,8 @@ public class Level {
         generateTemple(rand.nextInt(SIZE-25),rand.nextInt(SIZE-25));
         System.out.println("World Generated. Populating the world...");
         populate();
+        setTileDamage();
+        p = new entity.Player(this);
         System.out.println("Population Complete. Level Generated.");
     }
     public void generateMineshaft(int x,int y){
@@ -103,5 +107,36 @@ public class Level {
             ents.add(new Entity(EntityType.values()[e],this));
         }
     }
-    
+    public void setTileDamage(){
+        for(int xx=0;xx<SIZE;xx++){
+            for(int yy=0;yy<SIZE;yy++){
+                switch(world[xx][yy]){
+                    case STONE:
+                        worldDamage[xx][yy]=10;
+                        break;
+                    case WOOD:
+                        worldDamage[xx][yy]=5;
+                        break;
+                    case STEEL:
+                        worldDamage[xx][yy]=15;
+                        break;
+                    case URANIUM:
+                        worldDamage[xx][yy]=30;
+                        break;
+                    case COAL:
+                        worldDamage[xx][yy]=12;
+                        break;
+                    case DIRT:
+                        worldDamage[xx][yy]=3;
+                        break;
+                    case AIR:
+                        worldDamage[xx][yy]=0;
+                        break;
+                    default:
+                        worldDamage[xx][yy]=2;
+                        break;
+                }
+            }
+        }
+    }
 }

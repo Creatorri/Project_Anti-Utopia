@@ -4,6 +4,7 @@ package entity;
 import assets.LoadArt;
 import java.util.Random;
 import render.Sprite;
+import util.AI;
 import world.Level;
 import world.TileType;
 
@@ -16,6 +17,7 @@ public class Entity {
     LoadArt la = new LoadArt();
     Level l;
     int x,y;
+    AI ai;
     public double health=20,maxhealth=20;
     public EntityType t;
     public Sprite sp;
@@ -57,16 +59,21 @@ public class Entity {
         }
         maxhealth=health;
         spawn();
-    }
-    public Entity(Level l1){
-        l=l1;
-        spawn();
+        ai= new AI(this,20);
     }
     public int getX(){
         return x;
     }
     public int getY(){
         return y;
+    }
+    /**
+     * Gets the distance to an entity
+     * @param e
+     * @return
+     */
+    public double distTo(Entity e){
+        return Math.sqrt(((x-e.x)*(x-e.x))+((y-e.y)*(y-e.y)));
     }
     public void spawn(){
         x=rand.nextInt(Level.SIZE);
@@ -77,12 +84,14 @@ public class Entity {
         }
     }
     public void move(int dx,int dy){
-        if(x+dx>=Level.SIZE || y+dy>=Level.SIZE || x+dx<=0 || y+dy<=0 || (l.world[x+dx][y+dy] != TileType.AIR && l.world[x+dx][y+dy] != TileType.FIRE && l.world[x+dx][y+dy] != TileType.TORCH) || dx==0 || dy==0){
+        if(x+dx>=Level.SIZE || y+dy>=Level.SIZE || x+dx<=0 || y+dy<=0 || (l.world[x+dx][y+dy] != TileType.AIR && l.world[x+dx][y+dy] != TileType.FIRE && l.world[x+dx][y+dy] != TileType.TORCH)){
         }else{
             x+=dx;
             y+=dy;
         }
     }
     public void update(){
+        int[] move = ai.pointTowards(l.p);
+        move(move[0],move[1]);
     }
 }
