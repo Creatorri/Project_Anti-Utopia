@@ -35,7 +35,7 @@ public class Frame extends JFrame{
         
         GameLoop.start();
         
-//        a.playSound("Ingame/Adventum Mirum.wav");
+        a.playSound("Home Screen/Canticum Inferos/Canticum Inferos Deluxe Version.wav");
         
         invalidate();
         validate();
